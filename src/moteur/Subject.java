@@ -1,4 +1,4 @@
-package main;
+package moteur;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package main;
+package moteur;
 
 public abstract class Observer {
 	

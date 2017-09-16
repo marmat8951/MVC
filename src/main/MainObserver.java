@@ -3,6 +3,7 @@ package main;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import moteur.Observer;
 
 public class MainObserver extends Observer{
 	

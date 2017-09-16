@@ -1,5 +1,8 @@
 package main;
 
+import moteur.Observer;
+import moteur.Subject;
+
 public class MainSubject extends Subject{
 	
 	private String state="";
