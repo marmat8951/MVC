@@ -17,7 +17,6 @@ public boolean detach(Observer o){
 public abstract void notifyObservers(String m);
 
 public void closeObservers(){
-	List<Observer> listOb=Observers;
 	for(Observer o:Observers){
 		o.close();
 	}
