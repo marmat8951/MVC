@@ -1,6 +1,4 @@
-package main;
-
-import java.util.Random;
+package mainUsingPull;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,12 +10,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import mainUsingPush.MainObserver;
-import mainUsingPush.MainSubject;
 
 public class MainWindow extends Application{
 
-	MainSubject ms=new MainSubject();
+	private MainSubject ms=new MainSubject();
+	private Controller ctrl = new Controller(ms);
 	@Override
 	public void start(Stage stage) throws Exception {
 		VBox root=new VBox();
@@ -35,37 +32,26 @@ public class MainWindow extends Application{
 		
 		message.addEventHandler(KeyEvent.KEY_PRESSED, e->{
 			if(e.getCode()==KeyCode.ENTER){
-				ms.notifyObservers(message.getText());
-				tf.setText(tf.getText()+"\n"+message.getText());
-				String style=("-fx-text-fill: rgba(");
-				message.setText("");
-				Random r=new Random();
-				style+=r.nextInt(256)+","+r.nextInt(256)+","+r.nextInt(256)+",1);";
-				
-				tf.setStyle(style);
+				ctrl.addLine(message.getText());
+				ms.notifyObservers();
+				tf.setText(ms.getState());
+				message.clear();
 			}
 			
 		});
 		
 		sendMessage.addEventHandler(ActionEvent.ACTION, e->{
-			ms.notifyObservers(message.getText());
-			tf.setText(tf.getText()+"\n"+message.getText());
-			String style=("-fx-text-fill: rgba(");
-			Random r=new Random();
-			style+=r.nextInt(256)+","+r.nextInt(256)+","+r.nextInt(256)+",1); -fx-background-color: rgb(";
-			style+=r.nextInt(256)+","+r.nextInt(256)+","+r.nextInt(256)+");";
-			tf.setStyle(style);
-			message.setText("");
-			
-			
-			
+			ctrl.addLine(message.getText());
+			ms.notifyObservers();
+			tf.setText(ms.getState());
+			message.clear();
 		});
 		
 		
 		buttonNewAudit.setText("Nouvel Auditeur");
 		buttonNewAudit.setPrefWidth(Double.MAX_VALUE);
 		buttonNewAudit.addEventHandler(ActionEvent.ACTION, e->{
-			MainObserver mo=new MainObserver();
+			MainObserver mo=new MainObserver(ms);
 			ms.attach(mo);
 			mo.lunch(ms);
 			
@@ -88,5 +74,8 @@ public class MainWindow extends Application{
 
 	}
 	
-	
+	public static void main(String[] args) {
+	    Application.launch(args);
+	}
+
 }

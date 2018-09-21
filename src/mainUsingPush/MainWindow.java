@@ -1,6 +1,4 @@
-package main;
-
-import java.util.Random;
+package mainUsingPush;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,8 +10,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import mainUsingPush.MainObserver;
-import mainUsingPush.MainSubject;
 
 public class MainWindow extends Application{
 
@@ -37,12 +33,9 @@ public class MainWindow extends Application{
 			if(e.getCode()==KeyCode.ENTER){
 				ms.notifyObservers(message.getText());
 				tf.setText(tf.getText()+"\n"+message.getText());
-				String style=("-fx-text-fill: rgba(");
 				message.setText("");
-				Random r=new Random();
-				style+=r.nextInt(256)+","+r.nextInt(256)+","+r.nextInt(256)+",1);";
 				
-				tf.setStyle(style);
+				
 			}
 			
 		});
@@ -50,15 +43,7 @@ public class MainWindow extends Application{
 		sendMessage.addEventHandler(ActionEvent.ACTION, e->{
 			ms.notifyObservers(message.getText());
 			tf.setText(tf.getText()+"\n"+message.getText());
-			String style=("-fx-text-fill: rgba(");
-			Random r=new Random();
-			style+=r.nextInt(256)+","+r.nextInt(256)+","+r.nextInt(256)+",1); -fx-background-color: rgb(";
-			style+=r.nextInt(256)+","+r.nextInt(256)+","+r.nextInt(256)+");";
-			tf.setStyle(style);
 			message.setText("");
-			
-			
-			
 		});
 		
 		
@@ -88,5 +73,9 @@ public class MainWindow extends Application{
 
 	}
 	
-	
+
+	public static void main(String[] args) {
+	    Application.launch(args);
+	}
+
 }

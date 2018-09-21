@@ -1,4 +1,4 @@
-package main;
+package mainUsingPush;
 
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
